@@ -204,7 +204,7 @@ describe('Call Center Admin', function() {
         })
     });*/
 
-    it('Change and Reset Password', function(){
+    /*it('Change and Reset Password', function(){
         getCaller.getCallers().then(function(caller){
             logout.logout();
             browser.sleep(200);
@@ -219,43 +219,43 @@ describe('Call Center Admin', function() {
             browser.waitForAngular();
             searchCaller.searchCallerWithUsername(caller);
             browser.waitForAngular();
-            element(by.xpath("//*[@id='page-wrapper']/div/div[2]/div/table/tbody/tr[1]/td[6]/a[4]")).click();
+            element(by.xpath("//!*[@id='page-wrapper']/div/div[2]/div/table/tbody/tr[1]/td[6]/a[4]")).click();
             browser.waitForAngular();
             element(by.linkText('Yes')).click();
             browser.sleep(300);
-            expect(element(by.xpath("//*[@id='page-wrapper']/div/div[1]/div/div/div")).isDisplayed()).toBe(true);
+            expect(element(by.xpath("//!*[@id='page-wrapper']/div/div[1]/div/div/div")).isDisplayed()).toBe(true);
             logout.logout();
             browser.sleep(200);
             login.loginPage(caller,'password');
             browser.sleep(200);
-            expect(browser.driver.findElement(by.xpath("//*[@id='body']/div[2]/div/div/div[2]/div")).isDisplayed()).toBe(true);
+            expect(browser.driver.findElement(by.xpath("//!*[@id='body']/div[2]/div/div/div[2]/div")).isDisplayed()).toBe(true);
         })
-    });
+    });*/
 
-    /*it('Delete Caller', function () {
+    it('Delete Caller', function () {
         browser.waitForAngular();
         browser.sleep(300);
         element(by.linkText('Callers')).click();
         browser.waitForAngular();
         browser.sleep(500);
-        searchCaller.searchCallerWithUsername(caller[0]);
-        //browser.waitForAngular();
-        browser.sleep(300);
-        browser.driver.findElement(by.xpath("//!*[@id='page-wrapper']/div/div[2]/div/table/tbody/tr[1]/td[6]/a[5]")).click();
-        browser.sleep(300);
-        element(by.linkText('Yes')).click();
-        browser.sleep(300);
-        browser.driver.findElement(by.xpath("//!*[@id='deleteCallerConfirmTwo']/div/div")).isDisplayed().then(function (viewModel) {
-            console.log('viewModel : '+viewModel);
-            if(viewModel){
-                browser.driver.findElement(by.linkText('Yes')).click();
-            }
-        });
-        browser.sleep(200);
-        searchCaller.searchCallerWithUsername(caller[0],'aa');
-        //browser.pause();
-        browser.driver.findElement(by.xpath("//!*[@id='page-wrapper']/div/div[2]/div/dir-pagination-controls/div[2]")).getText().then(function(noCaller){
-            expect(noCaller.substring(noCaller.lastIndexOf('of')+3, noCaller.lastIndexOf('records')-1)).toEqual('0');
+        getCaller.getCallers().then(function(caller){
+            searchCaller.searchCallerWithUsername(caller);
+            browser.sleep(300);
+            browser.driver.findElement(by.xpath("//*[@id='page-wrapper']/div/div[2]/div/table/tbody/tr[1]/td[6]/a[5]")).click();
+            browser.sleep(300);
+            element(by.linkText('Yes')).click();
+            browser.sleep(300);
+            browser.driver.findElement(by.xpath("//*[@id='deleteCallerConfirmTwo']/div/div")).isDisplayed().then(function (viewModel) {
+                console.log('viewModel : '+viewModel);
+                if(viewModel){
+                    browser.driver.findElement(by.linkText('Yes')).click();
+                }
+            });
+            browser.sleep(200);
+            searchCaller.searchCallerWithUsername(caller,'aa');
+            browser.driver.findElement(by.xpath("//*[@id='page-wrapper']/div/div[2]/div/dir-pagination-controls/div[2]")).getText().then(function(noCaller){
+                expect(noCaller.substring(noCaller.lastIndexOf('of')+3, noCaller.lastIndexOf('records')-1)).toEqual('0');
+            })
         })
-    })*/
+    })
 });
