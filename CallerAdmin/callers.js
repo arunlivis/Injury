@@ -5,6 +5,8 @@ var searchCaller=require('../Helpers/searchCallerWithUsername');
 var changePassword=require('../Helpers/changePassword');
 var callersClick=require('../Helpers/clickCallers');
 var urlPage=require('../Helpers/urlPage');
+var callersFill=require('../Helpers/fillCallers');
+var getCaller=require('../Helpers/getCallers');
 
 describe('Call Center Admin', function() {
 
@@ -14,7 +16,7 @@ describe('Call Center Admin', function() {
         callersClick.clickCallers();
     });
 
-    function fillCallers(status) {
+    /*function fillCallers(status) {
         var firstName=element(by.model('caller.firstName'));
         var lastName=element(by.model('caller.lastName'));
         var userName=element(by.model('caller.username'));
@@ -62,9 +64,9 @@ describe('Call Center Admin', function() {
         notes.sendKeys('Notes');
 
         browser.waitForAngular();
-    }
+    }*/
 
-    it('Add Callers', function(){
+    /*it('Add Callers', function(){
         var saveButton=element(by.linkText('Save'));
 
         element(by.linkText('Add Caller')).click();
@@ -79,9 +81,9 @@ describe('Call Center Admin', function() {
         element.all(by.repeater('caller in callers').column('caller.username')).getText().then(function (value) {
             expect(value).toContain('caller5');
         })
-    });
+    });*/
 
-    var caller=[];
+    /*var caller=[];
     it('Get Callers Username', function () {
         browser.sleep(200);
         element.all(by.repeater('caller in callers').column('caller.username')).getText().then(function (value) {
@@ -94,29 +96,32 @@ describe('Call Center Admin', function() {
 
     it('Search Caller with Username', function(){
         searchCaller.searchCallerWithUsername(caller[0]);
-    });
-
-    /*it('Edit Callers', function(){
-        var updateButton=element(by.linkText('Update'));
-
-        element(by.xpath('//!*[@id="page-wrapper"]/div/div[2]/div/table/tbody/tr[1]/td[6]/a[1]')).click();
-
-        fillCallers('edit');
-
-        updateButton.isDisplayed().then(function(updateStatus){
-            if(updateStatus){
-                updateButton.click();
-            }
-        });
-        browser.waitForAngular();
-        element.all(by.repeater('caller in callers').column('caller.username')).getText().then(function (value) {
-            expect(value).toContain(caller[0]);
-        })
     });*/
 
-    it('Disable and Enable Callers', function(){
-        var enableButton=element(by.xpath("//*[@id='page-wrapper']/div/div[2]/div/table/tbody/tr[1]/td[6]/a[2]"));
-        var disableButton=element(by.xpath("//*[@id='page-wrapper']/div/div[2]/div/table/tbody/tr[1]/td[6]/a[3]"));
+    it('Edit Callers', function(){
+        var updateButton=element(by.linkText('Update'));
+        getCaller.getCallers().then(function(caller){
+            searchCaller.searchCallerWithUsername(caller);
+            element(by.xpath('//*[@id="page-wrapper"]/div/div[2]/div/table/tbody/tr[1]/td[6]/a[1]')).click();
+
+            callersFill.fillCallers('edit');
+
+            updateButton.isDisplayed().then(function(updateStatus){
+                if(updateStatus){
+                    updateButton.click();
+                }
+            });
+            browser.waitForAngular();
+            element.all(by.repeater('caller in callers').column('caller.username')).getText().then(function (value) {
+                expect(value).toContain(caller);
+            })
+        });
+    });
+
+
+    /*it('Disable and Enable Callers', function(){
+        var enableButton=element(by.xpath("//!*[@id='page-wrapper']/div/div[2]/div/table/tbody/tr[1]/td[6]/a[2]"));
+        var disableButton=element(by.xpath("//!*[@id='page-wrapper']/div/div[2]/div/table/tbody/tr[1]/td[6]/a[3]"));
         searchCaller.searchCallerWithUsername(caller[0]);
         enableButton.isDisplayed().then(function (enable) {
             if(enable){
@@ -124,7 +129,7 @@ describe('Call Center Admin', function() {
                 browser.waitForAngular();
                 expect(disableButton.isDisplayed()).toBe(true);
 
-                element(by.xpath("//*[@id='page-wrapper']/div/div[2]/div/table/tbody/tr[1]/td[6]/a[1]")).getAttribute('href').then(function (str) {
+                element(by.xpath("//!*[@id='page-wrapper']/div/div[2]/div/table/tbody/tr[1]/td[6]/a[1]")).getAttribute('href').then(function (str) {
                     console.log('str : '+str);
                     var callerID=str.lastIndexOf("/")+1;
                     browser.sleep(500);
@@ -147,13 +152,13 @@ describe('Call Center Admin', function() {
                 logout.logout();
                 login.loginPage(caller[0],caller[0]);
                 browser.sleep(200);
-                expect(browser.driver.findElement(by.xpath("//*[@id='body']/div[2]/div/div/div[2]/div")).isDisplayed()).toBe(true);
+                expect(browser.driver.findElement(by.xpath("//!*[@id='body']/div[2]/div/div/div[2]/div")).isDisplayed()).toBe(true);
                 login.loginPage('calleradmin', 'calleradmin');
             }
             else{
                 expect(disableButton.isDisplayed()).toBe(true);
 
-                element(by.xpath("//*[@id='page-wrapper']/div/div[2]/div/table/tbody/tr[1]/td[6]/a[1]")).getAttribute('href').then(function (str) {
+                element(by.xpath("//!*[@id='page-wrapper']/div/div[2]/div/table/tbody/tr[1]/td[6]/a[1]")).getAttribute('href').then(function (str) {
                     console.log('str : '+str);
                     var callerID=str.lastIndexOf("/")+1;
                     browser.sleep(500);
@@ -175,7 +180,7 @@ describe('Call Center Admin', function() {
                     logout.logout();
                     login.loginPage(caller[0],caller[0]);
                     browser.sleep(200);
-                    expect(browser.driver.findElement(by.xpath("//*[@id='body']/div[2]/div/div/div[2]/div")).isDisplayed()).toBe(true);
+                    expect(browser.driver.findElement(by.xpath("//!*[@id='body']/div[2]/div/div/div[2]/div")).isDisplayed()).toBe(true);
 
                     login.loginPage('calleradmin', 'calleradmin');
                     browser.waitForAngular();
@@ -203,7 +208,7 @@ describe('Call Center Admin', function() {
                 browser.sleep(200);
             }
         })
-    });
+    });*/
 
     /*it('Change Password', function(){
         logout.logout();
