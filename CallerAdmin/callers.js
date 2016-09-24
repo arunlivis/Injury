@@ -98,11 +98,11 @@ describe('Call Center Admin', function() {
         searchCaller.searchCallerWithUsername(caller[0]);
     });*/
 
-    it('Edit Callers', function(){
+    /*it('Edit Callers', function(){
         var updateButton=element(by.linkText('Update'));
         getCaller.getCallers().then(function(caller){
             searchCaller.searchCallerWithUsername(caller);
-            element(by.xpath('//*[@id="page-wrapper"]/div/div[2]/div/table/tbody/tr[1]/td[6]/a[1]')).click();
+            element(by.xpath('//!*[@id="page-wrapper"]/div/div[2]/div/table/tbody/tr[1]/td[6]/a[1]')).click();
 
             callersFill.fillCallers('edit');
 
@@ -116,99 +116,93 @@ describe('Call Center Admin', function() {
                 expect(value).toContain(caller);
             })
         });
-    });
+    });*/
 
 
-    /*it('Disable and Enable Callers', function(){
-        var enableButton=element(by.xpath("//!*[@id='page-wrapper']/div/div[2]/div/table/tbody/tr[1]/td[6]/a[2]"));
-        var disableButton=element(by.xpath("//!*[@id='page-wrapper']/div/div[2]/div/table/tbody/tr[1]/td[6]/a[3]"));
-        searchCaller.searchCallerWithUsername(caller[0]);
-        enableButton.isDisplayed().then(function (enable) {
-            if(enable){
-                enableButton.click();
-                browser.waitForAngular();
-                expect(disableButton.isDisplayed()).toBe(true);
+    it('Disable and Enable Callers', function(){
+        var enableButton=element(by.xpath("//*[@id='page-wrapper']/div/div[2]/div/table/tbody/tr[1]/td[6]/a[2]"));
+        var disableButton=element(by.xpath("//*[@id='page-wrapper']/div/div[2]/div/table/tbody/tr[1]/td[6]/a[3]"));
+        getCaller.getCallers().then(function(caller){
+            searchCaller.searchCallerWithUsername(caller);
+            enableButton.isDisplayed().then(function (enable) {
+                if(enable){
+                    enableButton.click();
+                    browser.waitForAngular();
+                    expect(disableButton.isDisplayed()).toBe(true);
 
-                element(by.xpath("//!*[@id='page-wrapper']/div/div[2]/div/table/tbody/tr[1]/td[6]/a[1]")).getAttribute('href').then(function (str) {
-                    console.log('str : '+str);
-                    var callerID=str.lastIndexOf("/")+1;
-                    browser.sleep(500);
-                    element(by.linkText('Patients')).click();
-                    console.log('Caller ID : '+str.substring(callerID));
+                    element(by.xpath("//*[@id='page-wrapper']/div/div[2]/div/table/tbody/tr[1]/td[6]/a[1]")).getAttribute('href').then(function (str) {
+                        console.log('str : '+str);
+                        var callerID=str.lastIndexOf("/")+1;
+                        browser.sleep(500);
+                        element(by.linkText('Patients')).click();
+                        console.log('Caller ID : '+str.substring(callerID));
 
-                    browser.sleep(200);
-                    //browser.waitForAngular();
-                    element(by.model('isCheckedAllGroupPatients')).click();
-                    element(by.id('assign')).click();
-                    
-                    element.all(by.css('select[ng-model="myForm.callerId"] option')).getAttribute('value').then(function (callers0) {
-                        // console.log('callers0 : '+callers0);
-                        // console.log('callers0 length : '+callers0.length);
-                        expect(callers0).not.toContain(str.substring(callerID));
-                    });
-                });
-                browser.sleep(500);
-                element(by.buttonText('Cancel')).click();
-                logout.logout();
-                login.loginPage(caller[0],caller[0]);
-                browser.sleep(200);
-                expect(browser.driver.findElement(by.xpath("//!*[@id='body']/div[2]/div/div/div[2]/div")).isDisplayed()).toBe(true);
-                login.loginPage('calleradmin', 'calleradmin');
-            }
-            else{
-                expect(disableButton.isDisplayed()).toBe(true);
+                        browser.sleep(200);
+                        //browser.waitForAngular();
+                        element(by.model('isCheckedAllGroupPatients')).click();
+                        element(by.id('assign')).click();
 
-                element(by.xpath("//!*[@id='page-wrapper']/div/div[2]/div/table/tbody/tr[1]/td[6]/a[1]")).getAttribute('href').then(function (str) {
-                    console.log('str : '+str);
-                    var callerID=str.lastIndexOf("/")+1;
-                    browser.sleep(500);
-                    element(by.linkText('Patients')).click();
-                    console.log('Caller ID : '+str.substring(callerID));
-
-                    browser.sleep(200);
-                    element(by.model('isCheckedAllGroupPatients')).click();
-                    element(by.id('assign')).click();
-                    browser.sleep(500);
-                    element.all(by.css('select[ng-model="myForm.callerId"] option')).getAttribute('value').then(function (callers1) {
-                        // console.log('callers1 : '+callers1);
-                        // console.log('callers1 length : '+callers1.length);
-                        // console.log('str.substring(callerID) '+str.substring(callerID));
-                        expect(callers1).not.toContain(str.substring(callerID));
+                        element.all(by.css('select[ng-model="myForm.callerId"] option')).getAttribute('value').then(function (callers0) {
+                            expect(callers0).not.toContain(str.substring(callerID));
+                        });
                     });
                     browser.sleep(500);
                     element(by.buttonText('Cancel')).click();
                     logout.logout();
-                    login.loginPage(caller[0],caller[0]);
+                    login.loginPage(caller,caller);
                     browser.sleep(200);
-                    expect(browser.driver.findElement(by.xpath("//!*[@id='body']/div[2]/div/div/div[2]/div")).isDisplayed()).toBe(true);
-
+                    expect(browser.driver.findElement(by.xpath("//*[@id='body']/div[2]/div/div/div[2]/div")).isDisplayed()).toBe(true);
                     login.loginPage('calleradmin', 'calleradmin');
-                    browser.waitForAngular();
-                    element(by.linkText('Callers')).click();
-                    browser.waitForAngular();
-                    searchCaller.searchCallerWithUsername(caller[0]);
-                    disableButton.click();
-                    browser.waitForAngular();
-                    expect(enableButton.isDisplayed()).toBe(true);
-                    browser.sleep(500);
-                    element(by.linkText('Patients')).click();
-                    browser.sleep(200);
-                    element(by.model('isCheckedAllGroupPatients')).click();
-                    element(by.id('assign')).click();
-                    browser.waitForAngular();
-                    browser.sleep(200);
+                }
+                else{
+                    expect(disableButton.isDisplayed()).toBe(true);
 
-                    element.all(by.css('select[ng-model="myForm.callerId"] option')).getAttribute('value').then(function (callers2) {
-                        // console.log('callers2 : '+callers2);
-                        // console.log('callers2 length : '+callers2.length);
-                        expect(callers2).toContain(str.substring(callerID));
+                    element(by.xpath("//*[@id='page-wrapper']/div/div[2]/div/table/tbody/tr[1]/td[6]/a[1]")).getAttribute('href').then(function (str) {
+                        console.log('str : '+str);
+                        var callerID=str.lastIndexOf("/")+1;
+                        browser.sleep(500);
+                        element(by.linkText('Patients')).click();
+                        console.log('Caller ID : '+str.substring(callerID));
+
+                        browser.sleep(200);
+                        element(by.model('isCheckedAllGroupPatients')).click();
+                        element(by.id('assign')).click();
+                        browser.sleep(500);
+                        element.all(by.css('select[ng-model="myForm.callerId"] option')).getAttribute('value').then(function (callers1) {
+                            expect(callers1).not.toContain(str.substring(callerID));
+                        });
+                        browser.sleep(500);
+                        element(by.buttonText('Cancel')).click();
+                        logout.logout();
+                        login.loginPage(caller,caller);
+                        browser.sleep(200);
+                        expect(browser.driver.findElement(by.xpath("//*[@id='body']/div[2]/div/div/div[2]/div")).isDisplayed()).toBe(true);
+
+                        login.loginPage('calleradmin', 'calleradmin');
+                        browser.waitForAngular();
+                        element(by.linkText('Callers')).click();
+                        browser.waitForAngular();
+                        searchCaller.searchCallerWithUsername(caller);
+                        disableButton.click();
+                        browser.waitForAngular();
+                        expect(enableButton.isDisplayed()).toBe(true);
+                        browser.sleep(500);
+                        element(by.linkText('Patients')).click();
+                        browser.sleep(200);
+                        element(by.model('isCheckedAllGroupPatients')).click();
+                        element(by.id('assign')).click();
+                        browser.waitForAngular();
+                        browser.sleep(200);
+
+                        element.all(by.css('select[ng-model="myForm.callerId"] option')).getAttribute('value').then(function (callers2) {
+                            expect(callers2).toContain(str.substring(callerID));
+                        });
                     });
-                });
-
-                browser.sleep(200);
-            }
+                    browser.sleep(200);
+                }
+            })
         })
-    });*/
+    });
 
     /*it('Change Password', function(){
         logout.logout();
