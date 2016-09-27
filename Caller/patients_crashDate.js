@@ -78,8 +78,7 @@ describe('Caller', function() {
 
             }
             console.log('crash date '+datesDate);
-            //checkPatient(2, datesDate);
-            checkPatient.checkPatient(2, datesDate);
+            checkPatient.checkPatient('caller',2, datesDate);
         });
 
     },1000000);

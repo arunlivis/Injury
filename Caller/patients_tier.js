@@ -29,7 +29,7 @@ describe('Caller', function() {
         element(by.model('patient.tier')).$('option:checked').getText().then(function (result) {
             console.log('Tier Name : '+result);
             if(randTierID!=0){
-                checkPatient.checkPatient(8, result);
+                checkPatient.checkPatient('caller',8, result);
             }
 
         });

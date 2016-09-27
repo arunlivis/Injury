@@ -1,11 +1,18 @@
 var rowCount=require('../Helpers/lastPageRowCount.js');
 
-exports.checkPatient=function(search, searchName) {
+exports.checkPatient=function(user,search, searchName) {
 
     var totalRecords, lastPage;
     var recPerPage;
+    var files;
+    if(user=='caller'){
+        files=element(by.xpath('//*[@id="page-wrapper"]/div/div/div[2]/div/table/tbody/tr/td/center/strong'));
+    }
+    else if(user=='calleradmin'){
+        files=element(by.xpath('//*[@id="page-wrapper"]/div/div[2]/div/table/tbody/tr/td/center/strong'));
+    }
         browser.sleep(300);
-        element(by.xpath('//*[@id="page-wrapper"]/div/div/div[2]/div/table/tbody/tr/td/center/strong')).isDisplayed().then(function (noRecords) {
+        files.isDisplayed().then(function (noRecords) {
             if(!noRecords){
                 browser.sleep(300);
                 browser.driver.executeScript('window.scrollTo(0,10000);');

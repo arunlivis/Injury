@@ -68,7 +68,7 @@ describe('Caller', function() {
                 }
 
             }
-            checkPatient.checkPatient(3, datesDate);
+            checkPatient.checkPatient('caller',3, datesDate);
         });
 
     });

@@ -7,7 +7,7 @@ var countyName=require('../Helpers/getCounty');
 describe('Caller', function() {
     it('Search Crash Report with County', function () {
         urlPage.urlPage();
-        login.loginPage('caller4', 'caller4');
+        login.loginPage('calleradmin', 'calleradmin');
         patientsClick.clickPatients();
 
         countyName.countyName().then(function (county) {
@@ -21,7 +21,7 @@ describe('Caller', function() {
             browser.sleep(500);
             element(by.linkText('Search')).click();
             browser.waitForAngular();
-            checkPatient.checkPatient('caller',1,county);
+            checkPatient.checkPatient('calleradmin',1,county);
         })
 
     });

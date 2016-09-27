@@ -18,7 +18,7 @@ describe('Caller', function() {
         element(by.model('patient.localReportNumber')).getAttribute('value').then(function (LRNtext) {
             localReportNumber.push(LRNtext);
             console.log('localReportNumber[0] : '+localReportNumber[0]);
-            checkPatient.checkPatient(6, localReportNumber[0]);
+            checkPatient.checkPatient('caller',6, localReportNumber[0]);
         });
     });
 

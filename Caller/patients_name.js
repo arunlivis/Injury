@@ -18,7 +18,7 @@ describe('Caller', function() {
             browser.waitForAngular();
             element(by.model('patient.patientName')).sendKeys(patName[randName]);
             browser.waitForAngular();
-            checkPatient.checkPatient(5, patName[randName]);
+            checkPatient.checkPatient('caller',5, patName[randName]);
         });
     });
 });
