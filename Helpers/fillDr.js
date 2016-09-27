@@ -1,6 +1,6 @@
 exports.fillDr=function(txt){
     
-        element(by.repeater('doctorInput in clinic.doctorsForms')).isDisplayed().then(function (isDrDisplay) {
+        element(by.repeater('doctorInput in clinic.doctorsForms')).isPresent().then(function (isDrDisplay) {
             if(isDrDisplay){
                 element.all(by.repeater('doctorInput in clinic.doctorsForms')).count().then(function(count) {
                     for(n=0;n<count;n++){
@@ -25,12 +25,17 @@ exports.fillDr=function(txt){
                         var randRemove=Math.floor(Math.random() * 2);
                         if(randRemove=1){
                             browser.sleep(100);
+                                
+                            if(txt==""){
                                 element(by.partialLinkText('Remove')).click();
                                 browser.sleep(300);
-                                if(txt!=""){
+                            }
+                            else{
+                                    element(by.partialLinkText('Remove')).click();
+                                    browser.sleep(300);
                                     element(by.partialLinkText("Yes")).click();
                                     browser.sleep(100);
-                                }
+                            }
                         }
                     }
 

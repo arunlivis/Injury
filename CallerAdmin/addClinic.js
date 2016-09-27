@@ -11,7 +11,7 @@ describe('Call Center Admin', function () {
         login.loginPage('calleradmin', 'calleradmin');
         clinicsClick.clickClinics();
         browser.sleep(500);
-        element(by.linkText('Add Clinic')).click();
+        
         clinicFill.fillClinics('save');
 
         for(i=0;i<7;i++){

@@ -7,16 +7,26 @@ exports.fillClinics=function(status){
         var officeNo=element(by.model('clinic.officeNumber'));
         var faxNo=element(by.model('clinic.faxNumber'));
         var serviceArea=element(by.model('clinic.serviceArea'));
-
-        browser.sleep(200);
-        name.sendKeys('Name');
-        name.clear();
-        expect(element(by.css('[ng-show="myForm.clinicName.$error.required"]')).isDisplayed()).toBe(true);
+        var clinics=require('../Helpers/getClinics');
+        
         if(status=='save'){
+                element(by.linkText('Add Clinic')).click();
+                browser.sleep(200);
+                name.sendKeys('Name');
+                name.clear();
+                expect(element(by.css('[ng-show="myForm.clinicName.$error.required"]')).isDisplayed()).toBe(true);
             name.sendKeys('Clinic Four');
         }
         else if(status=='update'){
-            name.sendKeys(clinicName[0]);
+                clinics.getClinics().then(function (clinicList) {
+                        var randClinic = Math.floor(Math.random() * clinicList.length);
+                        element(by.model('search.clinicName')).sendKeys(clinicList[randClinic]);
+                        element(by.xpath("//*[@id='page-wrapper']/div/div[2]/div/table/tbody/tr[1]/td[5]/a[2]")).click();
+                        name.sendKeys('Name');
+                        name.clear();
+                        expect(element(by.css('[ng-show="myForm.clinicName.$error.required"]')).isDisplayed()).toBe(true);
+                        name.sendKeys(clinicList[randClinic]);
+                });
         }
         address.sendKeys('Clinic Address');
         address.clear();
