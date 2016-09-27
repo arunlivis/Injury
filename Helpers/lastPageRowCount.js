@@ -1,14 +1,24 @@
-exports.lastPageRowCount=function(search, searchName){
+exports.lastPageRowCount=function(user, search, searchName){
     var patients;
+    var data;
+    var forDate;
+    if(user=='caller'){
+        data='callerData';
+        forDate='callerP'
+    }
+    else if(user=='calleradmin'){
+        data='patient';
+        forDate='p';
+    }
     if(search==1){
-        patients = element.all(by.repeater('callerData in resultData.patientSearchLists').column('callerData.county'));
+        patients = element.all(by.repeater(data+' in resultData.patientSearchLists').column(data+'.county'));
         patients.getText().then(function(object){
             console.log('cell text '+object);
             expect(object).toContain(searchName);
         });
     }
     else if(search==2){
-        patients = element.all(by.repeater('resultData in callerPatientSearchData').column('resultData.crashDate'));
+        patients = element.all(by.repeater('resultData in '+forDate+'atientSearchData').column('resultData.crashDate'));
         patients.getText().then(function(lRN){
             for(var i=0;i<lRN.length;i++){
                 var strLength=lRN[i].length;
@@ -20,7 +30,7 @@ exports.lastPageRowCount=function(search, searchName){
         });
     }
     else if(search==3){
-        patients = element.all(by.repeater('resultData in callerPatientSearchData').column('resultData.addedDate'));
+        patients = element.all(by.repeater('resultData in '+forDate+'atientSearchData').column('resultData.addedDate'));
         patients.getText().then(function(lRN){
             for(var i=0;i<lRN.length;i++){
                 var strLength=lRN[i].length;
@@ -34,7 +44,7 @@ exports.lastPageRowCount=function(search, searchName){
     }
 
     else if(search==4){
-        patients = element.all(by.repeater('callerData in resultData.patientSearchLists').column('callerData.phoneNumber'));
+        patients = element.all(by.repeater(data+' in resultData.patientSearchLists').column(data+'.phoneNumber'));
         patients.getText().then(function(object){
             for(var i=0;i<object.length;i++){
                 console.log('cell text '+object[i]);
@@ -44,7 +54,7 @@ exports.lastPageRowCount=function(search, searchName){
         });
     }
     else if(search==5){
-        patients = element.all(by.repeater('callerData in resultData.patientSearchLists').column('callerData.name'));
+        patients = element.all(by.repeater(data+' in resultData.patientSearchLists').column(data+'.name'));
         patients.getText().then(function(object){
             for(var i=0;i<object.length;i++){
                 //console.log('cell text '+object[i]);
@@ -54,7 +64,7 @@ exports.lastPageRowCount=function(search, searchName){
         });
     }
     else if(search==6){
-        patients = element.all(by.repeater('callerData in resultData.patientSearchLists').column('callerData.localReportNumber'));
+        patients = element.all(by.repeater(data+' in resultData.patientSearchLists').column(data+'.localReportNumber'));
         patients.getText().then(function(lRN){
             for(var i=0;i<lRN.length;i++){
                 var strLength=lRN[i].length;
@@ -67,28 +77,28 @@ exports.lastPageRowCount=function(search, searchName){
         });
     }
     else if(search==7){
-        patients = element.all(by.repeater('callerData in resultData.patientSearchLists').column('callerData.caller'));
+        patients = element.all(by.repeater(data+' in resultData.patientSearchLists').column(data+'.caller'));
         patients.getText().then(function(object){
             //console.log('cell text '+object);
             expect(object).toContain(searchName);
         });
     }
     else if(search==8){
-        patients = element.all(by.repeater('callerData in resultData.patientSearchLists').column('callerData.tier'));
+        patients = element.all(by.repeater(data+' in resultData.patientSearchLists').column(data+'.tier'));
         patients.getText().then(function(object){
             //console.log('cell text '+object);
             expect(object).toContain(searchName);
         });
     }
     else if(search==9){
-        patients = element.all(by.repeater('callerData in resultData.patientSearchLists').column('callerData.patientStatus'));
+        patients = element.all(by.repeater(data+' in resultData.patientSearchLists').column(data+'.patientStatus'));
         patients.getText().then(function(object){
             console.log('cell text '+object);
             expect(object).toContain(searchName);
         });
     }
     else if(search==10){
-        patients = element.all(by.repeater('callerData in resultData.patientSearchLists').column('callerData.isArchived'));
+        patients = element.all(by.repeater(data+' in resultData.patientSearchLists').column(data+'.isArchived'));
         patients.valueOf().then(function(object){
             console.log('cell text '+object);
             //expect(object).toContain(searchName);

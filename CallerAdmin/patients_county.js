@@ -24,5 +24,5 @@ describe('Caller', function() {
             checkPatient.checkPatient('calleradmin',1,county);
         })
 
-    });
+    },999999);
 });

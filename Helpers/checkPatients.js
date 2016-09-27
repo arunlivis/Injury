@@ -41,18 +41,18 @@ exports.checkPatient=function(user,search, searchName) {
                                 browser.waitForAngular();
                                 console.log('Last page  '+ lastPage);
                                 while(clickable<lastPage-1){
-                                    rowCount.lastPageRowCount(search, searchName);
+                                    rowCount.lastPageRowCount(user,search, searchName);
                                     element(by.partialLinkText('›')).click();
                                     //console.log('clickable '+clickable);
                                     clickable++;
                                 }
 
-                                rowCount.lastPageRowCount(search, searchName);
+                                rowCount.lastPageRowCount(user,search, searchName);
                             });
                         }
 
                         else{
-                            rowCount.lastPageRowCount(search, searchName);
+                            rowCount.lastPageRowCount(user,search, searchName);
                         }
                     });
 
