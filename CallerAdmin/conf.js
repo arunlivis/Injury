@@ -15,7 +15,7 @@ exports.config = {
   directConnect: true,
 
   seleniumAddress: 'http://localhost:4444/wd/hub',
-  specs: ['callers.js'],
+  specs: ['clinics.js'],
 
   jasmineNodeOpts: {
     showColors: true,

@@ -1,14 +1,14 @@
 var logout=require('../Helpers/toLogout');
 var login=require('../Helpers/toLoginPage');
+var clinicsClick=require('../Helpers/clickClinics');
+var urlPage=require('../Helpers/urlPage');
 
 describe('Call Center Admin', function () {
-    protractor.urlHelper.urlPage();
 
     it('Click on Clinics', function(){
+        urlPage.urlPage();
         login.loginPage('calleradmin', 'calleradmin');
-        browser.waitForAngular();
-        element(by.linkText('Clinics')).click();
-        browser.waitForAngular();
+        clinicsClick.clickClinics();
     });
 
     var arrWorking=[];
