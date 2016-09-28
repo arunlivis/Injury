@@ -2,8 +2,11 @@ var HtmlScreenshotReporter = require('protractor-jasmine2-screenshot-reporter');
 var fileDate=new Date().toJSON().slice(0,10);
 
 var reporter = new HtmlScreenshotReporter({
-    dest: './screenshots/phoneNumber',
-    filename: 'phoneNumber '+fileDate+'.html'
+
+    dest: './screenshots/patients_phoneNumber',
+    cleanDestination: false,
+    showConfiguration: false,
+    filename: 'patients_phoneNumber '+fileDate+'.html'
 });
 
 exports.config = {
@@ -23,18 +26,9 @@ exports.config = {
             reporter.beforeLaunch(resolve);
         });
     },
-
     onPrepare: function(){
-        protractor.urlHelper = require('../Helpers/urlPage.js');
-        protractor.loginHelper = require('../Helpers/toLoginPage.js');
-        protractor.countReportHelper=require('../Helpers/countReport.js');
-        protractor.logoutHelper = require('../Helpers/toLogout.js');
-        protractor.changePasswordelper = require('../Helpers/changePassword.js');
-        protractor.countyHelper = require('../Helpers/getCounty');
-        protractor.phoneHelper=require('../Helpers/getPhoneNumber');
         jasmine.getEnv().addReporter(reporter);
     },
-
     afterLaunch: function(exitCode) {
         return new Promise(function(resolve){
             reporter.afterLaunch(resolve.bind(this, exitCode));
