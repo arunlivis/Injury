@@ -1,5 +1,5 @@
 var checkPatient=require('../Helpers/checkPatients');
-exports.callLogs=function(){
+exports.callLogs=function(user){
     var randResponseID;
     var randClinicID;
 
@@ -61,7 +61,8 @@ exports.callLogs=function(){
             else if(result==9){
                 status='Unable To Reach';
             }
-            checkPatient.checkPatient(9, status)
+            
+            checkPatient.checkPatient(user, 9, status)
         });
     });
 };
