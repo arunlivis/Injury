@@ -8,11 +8,11 @@ var localReport=require('../Helpers/getLocalReport.js');
 describe('Caller', function() {
     it('Check with Local Report Number', function () {
         urlPage.urlPage();
-        login.loginPage('caller4', 'caller4');
+        login.loginPage('calleradmin', 'calleradmin');
         patientsClick.clickPatients();
         localReport.localReport();
         element(by.model('patient.localReportNumber')).getAttribute('value').then(function (LRNtext) {
-            checkPatient.checkPatient('caller',6, LRNtext);
+            checkPatient.checkPatient('calleradmin',6, LRNtext);
         });
     });
 });

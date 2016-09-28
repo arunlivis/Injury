@@ -64,16 +64,14 @@ exports.lastPageRowCount=function(user, search, searchName){
         });
     }
     else if(search==6){
-        patients = element.all(by.repeater(data+' in resultData.patientSearchLists').column(data+'.localReportNumber'));
+
+        patients = element.all(by.repeater('resultData in '+forDate+'atientSearchData').column('resultData.localReportNumber'));
         patients.getText().then(function(lRN){
             for(var i=0;i<lRN.length;i++){
                 var strLength=lRN[i].length;
-                //console.log('strLength '+strLength);
                 var object=lRN[i].slice(lRN[i].lastIndexOf(':')+2,strLength);
-                //console.log('cell text '+object);
                 expect(object).toContain(searchName);
             }
-
         });
     }
     else if(search==7){
