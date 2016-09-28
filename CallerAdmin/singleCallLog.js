@@ -9,12 +9,12 @@ var callLog=require('../Helpers/callLogs');
 describe('Caller', function() {
     it('Check with Local Report Number', function () {
         urlPage.urlPage();
-        login.loginPage('caller4', 'caller4');
+        login.loginPage('calleradmin', 'calleradmin');
         patientsClick.clickPatients();
         localReport.localReport().then(function(localReportNumber){
-            checkPatient.checkPatient('caller',6, localReportNumber);
-            element(by.xpath('//*[@id="page-wrapper"]/div/div/div[2]/div/table/tbody/tr[2]/td[1]/input')).click();
-            element(by.xpath('//*[@id="page-wrapper"]/div/div/div[2]/div/table/tbody/tr[2]/td[1]/input')).isSelected().then(function (selected) {
+            checkPatient.checkPatient('calleradmin',6, localReportNumber);
+            element(by.xpath('//*[@id="page-wrapper"]/div/div[2]/div/table/tbody/tr[2]/td[1]/input')).click();
+            element(by.xpath('//*[@id="page-wrapper"]/div/div[2]/div/table/tbody/tr[2]/td[1]/input')).isSelected().then(function (selected) {
                 if(selected){
                     element(by.linkText("Add Call Log")).isDisplayed().then(function (display) {
                         if(display){
@@ -25,6 +25,6 @@ describe('Caller', function() {
                 }
             });
         });
-        callLog.callLogs('caller');
+        callLog.callLogs('calleradmin');
     });
 });
