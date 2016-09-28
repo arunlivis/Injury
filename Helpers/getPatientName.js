@@ -1,6 +1,13 @@
-exports.patientName=function(){
+exports.patientName=function(user){
+    if(user=='caller'){
+        data='callerData';
+    }
+    else if(user=='calleradmin'){
+        data='patient';
+    }
     browser.sleep(500);
-    return element.all(by.repeater('callerData in resultData.patientSearchLists').column('callerData.name')).getText().then(function (name) {
-        return name;
+    return element.all(by.repeater(data+' in resultData.patientSearchLists').column(data+'.name')).getText().then(function (name) {
+        var randName=Math.floor(Math.random() * name.length);
+        return name[randName];
     });
 };
