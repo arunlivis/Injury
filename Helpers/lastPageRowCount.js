@@ -102,4 +102,11 @@ exports.lastPageRowCount=function(user, search, searchName){
             //expect(object).toContain(searchName);
         });
     }
+    else if(search==11){
+        patients = element.all(by.repeater('appointment in appointments').column('appointment.patientName'));
+        patients.getText().then(function(object){
+            console.log('cell text '+object);
+            expect(object).toContain(searchName);
+        });
+    }
 };

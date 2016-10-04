@@ -1,14 +1,13 @@
 var login=require('../Helpers/toLoginPage');
+var appointmentsClick=require('../Helpers/clickAppointments');
+var urlPage=require('../Helpers/urlPage');
+var checkPatient=require('../Helpers/checkPatients');
 
 describe('Call Center Admin', function () {
-    protractor.urlHelper.urlPage();
-
     it('Click on Appointments', function(){
+        urlPage.urlPage();
         login.loginPage('calleradmin', 'calleradmin');
-        browser.waitForAngular();
-        element(by.linkText('Appointments')).click();
-        browser.waitForAngular();
-        browser.sleep(300);
+        appointmentsClick.clickAppointments();
     });
 
     //protractor.countReportHelper.countReport('Appointments', 'appointment');
@@ -18,10 +17,11 @@ describe('Call Center Admin', function () {
             randName=Math.floor(Math.random()*names.length);
             console.log('Name : '+names[randName]);
             element(by.model('searchAppointment.patientName')).sendKeys(names[randName]);
+            checkPatient.checkPatient('appointment',11,names[randName]);
             element(by.css('select[ng-model="appointment.status"]')).$$('option:checked').getAttribute('value').then(function (selectedStatus) {
                 element.all(by.css('select[ng-model="appointment.status"] option')).getAttribute('value').then(function (apptStatus) {
                     console.log('apptStatus : '+apptStatus);
-                    var randNo=Math.floor(Math.random()*(apptStatus.length-1));
+                    var randNo=Math.floor(Math.random()*apptStatus.length);
                     console.log('randNo : '+randNo);
                     element(by.css('select[ng-model="appointment.status"]')).$('[value="'+apptStatus[randNo]+'"]').click();
                     if(selectedStatus!=apptStatus[randNo]){
