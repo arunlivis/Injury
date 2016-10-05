@@ -15,16 +15,9 @@ describe('Super Admin', function() {
                     if(value){
                         a.push(l);
                     }
-
-                    //console.log('value '+value);
-
                 }})();
             element(by.css('[id="'+k+'"][checked="checked"]')).isPresent().then(func);
         }
-        /*element(by.id('1')).isSelected().then(function (value) {
-            console.log('arrCheckedID '+arrCheckedID);
-        });*/
-
     }
 
     var clickID;
@@ -67,31 +60,31 @@ describe('Super Admin', function() {
             arrID=arrID.concat(arrOldCheckedID);
             console.log('arrID '+arrID);
 
-        arrID.sort(function(c, d){return c-d});
-
-        var current = null;
-        var cnt = 0;
-        console.log('a.length '+arrID.length);
-        for (var i = 0; i < arrID.length; i++) {
-            if (arrID[i] != current) {
-                if (cnt > 0) {
-                    console.log(current + ' comes --> ' + cnt + ' times');
-                    if(cnt%2==1){
-                        arrCorrectID.push(current);
+            arrID.sort(function(c, d){return c-d});
+    
+            var current = null;
+            var cnt = 0;
+            console.log('a.length '+arrID.length);
+            for (var i = 0; i < arrID.length; i++) {
+                if (arrID[i] != current) {
+                    if (cnt > 0) {
+                        console.log(current + ' comes --> ' + cnt + ' times');
+                        if(cnt%2==1){
+                            arrCorrectID.push(current);
+                        }
                     }
+                    current = arrID[i];
+                    cnt = 1;
+                } else {
+                    cnt++;
                 }
-                current = arrID[i];
-                cnt = 1;
-            } else {
-                cnt++;
             }
-        }
-        if (cnt > 0) {
-            console.log(current + ' comes --> ' + cnt + ' times');
-            if(cnt%2==1){
-                arrCorrectID.push(current);
+            if (cnt > 0) {
+                console.log(current + ' comes --> ' + cnt + ' times');
+                if(cnt%2==1){
+                    arrCorrectID.push(current);
+                }
             }
-        }
         });
     }
 
@@ -229,7 +222,7 @@ describe('Super Admin', function() {
 
    //protractor.countReportHelper.countReport('All','callerAdmin');
 
-   /* it('Add Call Center Admin', function () {
+    it('Add Call Center Admin', function () {
         browser.sleep(1000);
         element(by.linkText('Add Call Center Admin')).click();
         browser.sleep(1000);
@@ -251,7 +244,7 @@ describe('Super Admin', function() {
 
         //browser.sleep(500);
         element(by.linkText('Save')).click();
-    });*/
+    });
 
     /*var userName='gfnvn';
     it('Search Username', function(){
