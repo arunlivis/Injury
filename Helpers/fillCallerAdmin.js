@@ -1,4 +1,4 @@
-exports.fillCallerAdmin=function(status, existName){
+exports.fillCallerAdmin=function(status, existName,arrOldCheckedID){
     var firstName=element(by.name('firstName'));
     var lastName=element(by.name('lastName'));
     var address=element(by.name('address'));
@@ -36,6 +36,7 @@ exports.fillCallerAdmin=function(status, existName){
     state.clear();
     expect(element(by.css('[ng-show="myForm.state.$error.required"]')).isDisplayed()).toBe(true);
     state.sendKeys('Tamilnadu');
+    zipcode.clear();
     zipcode.sendKeys('12@#');
     expect(element(by.css('[ng-show="!myForm.zipcode.$error.required&&myForm.zipcode.$error.validateZipcode"]')).isDisplayed()).toBe(true);
     zipcode.clear();
@@ -73,7 +74,6 @@ exports.fillCallerAdmin=function(status, existName){
     var clickable=0;
     var arrID=[];
     var arrCorrectID = [];
-    var arrOldCheckedID=[];
     for(i=0;i<10;i++){
         var randID = Math.floor(Math.random()*89);
         if(randID==0){
@@ -105,7 +105,6 @@ exports.fillCallerAdmin=function(status, existName){
         if(status=='update'){
             arrID=arrID.concat(arrOldCheckedID);
         }
-        
         arrID.sort(function(c, d){return c-d});
 
         var current = null;

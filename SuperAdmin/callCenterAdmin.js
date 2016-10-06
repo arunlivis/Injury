@@ -255,7 +255,7 @@ describe('Super Admin', function() {
         checkAdmin(1, userName);
     });*/
 
-    /*it('Edit Call Center Admin', function () {
+    it('Edit Call Center Admin', function () {
         browser.sleep(1000);
         element(by.css('[data-hint="Edit Call Center Admin"]')).click();
         browser.sleep(1000);
@@ -289,7 +289,7 @@ describe('Super Admin', function() {
 
         element(by.linkText('Update')).click();
         browser.sleep(500);
-    });*/
+    });
 
     /*it('Disable Call Center Admin', function () {
         browser.sleep(1000);
