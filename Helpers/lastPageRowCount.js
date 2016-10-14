@@ -10,15 +10,31 @@ exports.lastPageRowCount=function(user, search, searchName){
         data='patient';
         forDate='p';
     }
+    else if(user=='crashreport'){
+        data='crashReport';
+        forDate='p';
+    }
     if(search==1){
-        patients = element.all(by.repeater(data+' in resultData.patientSearchLists').column(data+'.county'));
+        if(user=='crashreport'){
+            patients = element.all(by.repeater(data+' in crashSearchData').column(data+'.county'));
+        }
+        else{
+            patients = element.all(by.repeater(data+' in resultData.patientSearchLists').column(data+'.county'));
+        }
+
         patients.getText().then(function(object){
             console.log('cell text '+object);
             expect(object).toContain(searchName);
         });
     }
     else if(search==2){
-        patients = element.all(by.repeater('resultData in '+forDate+'atientSearchData').column('resultData.crashDate'));
+        if(user=='crashreport'){
+            patients = element.all(by.repeater(data+' in crashSearchData').column(data+'.crashDate'));
+        }
+        else{
+            patients = element.all(by.repeater('resultData in '+forDate+'atientSearchData').column('resultData.crashDate'));
+        }
+
         patients.getText().then(function(lRN){
             for(var i=0;i<lRN.length;i++){
                 var strLength=lRN[i].length;
@@ -30,7 +46,13 @@ exports.lastPageRowCount=function(user, search, searchName){
         });
     }
     else if(search==3){
-        patients = element.all(by.repeater('resultData in '+forDate+'atientSearchData').column('resultData.addedDate'));
+        if(user=='crashreport'){
+            patients = element.all(by.repeater(data+' in crashSearchData').column(data+'.addedDate'));
+        }
+        else{
+            patients = element.all(by.repeater('resultData in '+forDate+'atientSearchData').column('resultData.addedDate'));
+        }
+
         patients.getText().then(function(lRN){
             for(var i=0;i<lRN.length;i++){
                 var strLength=lRN[i].length;
@@ -104,6 +126,13 @@ exports.lastPageRowCount=function(user, search, searchName){
     }
     else if(search==11){
         patients = element.all(by.repeater('appointment in appointments').column('appointment.patientName'));
+        patients.getText().then(function(object){
+            console.log('cell text '+object);
+            expect(object).toContain(searchName);
+        });
+    }
+    else if(search==12){
+        patients = element.all(by.repeater(data+' in crashSearchData').column(data+'.crashId'));
         patients.getText().then(function(object){
             console.log('cell text '+object);
             expect(object).toContain(searchName);

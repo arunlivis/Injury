@@ -5,18 +5,22 @@ exports.checkPatient=function(user,search, searchName) {
     var totalRecords, lastPage;
     var recPerPage;
     var files;
-    var searchRec;
+    //var searchRec;
     if(user=='caller'){
         files=element(by.xpath('//*[@id="page-wrapper"]/div/div/div[2]/div/table/tbody/tr/td/center/strong'));
-        searchRec=element(by.model('patient.itemsPerPage'));
+        //searchRec=element(by.id('noOfRows'));
     }
     else if(user=='calleradmin'){
         files=element(by.xpath('//*[@id="page-wrapper"]/div/div[2]/div/table/tbody/tr/td/center/strong'));
-        searchRec=element(by.model('patient.itemsPerPage'));
+        //searchRec=element(by.id('noOfRows'));
     }
     else if(user=='appointment'){
         files=element(by.xpath('//*[@id="dataTables-example"]/tbody[2]/tr/td'));
-        searchRec=element(by.model('searchAppointment.itemsPerPage'));
+        //searchRec=element(by.id('noOfRows'));
+    }
+    else if(user=='crashreport'){
+        files=element(by.xpath('//*[@id="page-wrapper"]/div/div/div[2]/div/table/tbody/tr/td/center/strong'));
+        //searchRec=element(by.id('noOfRows'));
     }
         browser.sleep(300);
         files.isDisplayed().then(function (noRecords) {
@@ -30,7 +34,7 @@ exports.checkPatient=function(user,search, searchName) {
                     //console.log("str "+ str);
                     totalRecords=parseInt(str);
 
-                    searchRec.$('option:checked').getText().then(function (result) {
+                    element(by.id('noOfRows')).$('option:checked').getText().then(function (result) {
 
                         var recordPerPage=result.substring(result.indexOf(" "), result.indexOf(" ",7)).trim();
                         recPerPage=parseInt(recordPerPage);
