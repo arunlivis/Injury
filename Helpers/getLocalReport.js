@@ -1,6 +1,22 @@
-exports.localReport=function() {
+exports.localReport=function(user) {
+    var localReportNumber;
+
+    if(user=='crashReport'){
+        localReportNumber=element.all(by.css('[title="Local Report Number"]'));
+    }
+    else if(user=='patient'){
+        localReportNumber=element.all(by.model('isCheckedAllGroupPatients')).getAttribute('id');
+    }
+
     browser.sleep(1000);
-    return element.all(by.model('isCheckedAllGroupPatients')).getAttribute('id').then(function (localReport) {
+    if(user=='crashReport'){
+        localReportNumber=localReportNumber.getText();
+    }
+    else if(user=='patient'){
+        localReportNumber=localReportNumber;
+    }
+    return localReportNumber.then(function (localReport) {
+        console.log('localReport : '+localReport);
         var randLRNID=Math.floor(Math.random()*localReport.length);
         browser.driver.executeScript('window.scrollTo(0,0);');
         element(by.partialLinkText('Reset')).click();

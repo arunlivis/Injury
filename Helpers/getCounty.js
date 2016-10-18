@@ -3,9 +3,9 @@
 exports.countyName=function(user){
     var crashID;
     if(user='patient'){
-        crashID=element.all(by.css('select[ng-model="patient.countyId"] option'));
+        crashID=element.all(by.css('select[ng-model="patient.countyId"] option'))
     }
-    if(user='crashReport'){
+    else if(user='crashReport'){
         crashID=element.all(by.css('select[ng-model="crashreport.county"] option'));
     }
     browser.sleep(200);

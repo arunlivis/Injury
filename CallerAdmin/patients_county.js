@@ -9,7 +9,7 @@ describe('Caller Admin', function() {
         urlPage.urlPage();
         login.loginPage('calleradmin', 'calleradmin');
         patientsClick.clickPatients();
-
+        console.log('Before County : ');
         countyName.countyName('patient').then(function (county) {
             browser.sleep(100);
             element(by.cssContainingText('option', county)).click();
@@ -24,5 +24,5 @@ describe('Caller Admin', function() {
             checkPatient.checkPatient('calleradmin',1,county);
         })
 
-    },999999);
+    });
 });

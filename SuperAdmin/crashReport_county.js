@@ -24,5 +24,5 @@ describe('Super Admin', function() {
             checkPatient.checkPatient('crashreport',1,county);
         })
 
-    },999999);
+    });
 });
