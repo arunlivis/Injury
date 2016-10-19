@@ -92,6 +92,7 @@ exports.lastPageRowCount=function(user, search, searchName){
             for(var i=0;i<lRN.length;i++){
                 var strLength=lRN[i].length;
                 var object=lRN[i].slice(lRN[i].lastIndexOf(':')+2,strLength);
+                console.log('cell text '+object);
                 expect(object).toContain(searchName);
             }
         });
