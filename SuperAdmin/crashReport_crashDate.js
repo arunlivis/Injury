@@ -1,13 +1,13 @@
 var checkPatient=require('../Helpers/checkPatients');
-var patientsClick=require('../Helpers/clickPatients');
+var crashReportClick=require('../Helpers/clickCrashReport');
 var urlPage=require('../Helpers/urlPage');
 var login=require('../Helpers/toLoginPage');
 
 describe('Caller Admin', function() {
     it('Search Crash Report with Crash Date', function () {
         urlPage.urlPage();
-        login.loginPage('calleradmin', 'calleradmin');
-        patientsClick.clickPatients();
+        login.loginPage('superadmin', 'superadmin');
+        crashReportClick.clickCrashReport();
 
         var noOfDays = [1,7,15,30,'Custom'];
         var randNoOfDays = Math.floor(Math.random() * 5);
@@ -78,7 +78,7 @@ describe('Caller Admin', function() {
 
             }
             console.log('crash date '+datesDate);
-            checkPatient.checkPatient('calleradmin', 2, datesDate);
+            checkPatient.checkPatient('crashreport', 2, datesDate);
         });
 
     },999999);

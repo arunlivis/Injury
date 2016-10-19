@@ -2,6 +2,7 @@ exports.lastPageRowCount=function(user, search, searchName){
     var patients;
     var data;
     var forDate;
+    var startNum;
     if(user=='caller'){
         data='callerData';
         forDate='callerP'
@@ -30,16 +31,18 @@ exports.lastPageRowCount=function(user, search, searchName){
     else if(search==2){
         if(user=='crashreport'){
             patients = element.all(by.repeater(data+' in crashSearchData').column(data+'.crashDate'));
+            startNum=1;
         }
         else{
             patients = element.all(by.repeater('resultData in '+forDate+'atientSearchData').column('resultData.crashDate'));
+            startNum=2;
         }
 
         patients.getText().then(function(lRN){
             for(var i=0;i<lRN.length;i++){
                 var strLength=lRN[i].length;
                 //console.log('strLength '+strLength);
-                var object=lRN[i].slice(lRN[i].lastIndexOf(':')+2,strLength);
+                var object=lRN[i].slice(lRN[i].lastIndexOf(':')+startNum,strLength);
                 console.log('cell text '+object);
                 expect(searchName).toContain(object);
             }
@@ -56,7 +59,7 @@ exports.lastPageRowCount=function(user, search, searchName){
         patients.getText().then(function(lRN){
             for(var i=0;i<lRN.length;i++){
                 var strLength=lRN[i].length;
-                console.log('strLength '+strLength);
+                //console.log('strLength '+strLength);
                 var object=lRN[i].slice(lRN[i].lastIndexOf(':')+2,strLength);
                 console.log('cell text '+object);
                 expect(searchName).toContain(object);
